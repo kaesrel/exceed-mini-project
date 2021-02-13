@@ -111,9 +111,7 @@ time.setMilliseconds(00);
 //       	});
 //     });
 
-var d = new Date();
-var n = d.getDate();
-d.setDate(n-1);
+
 
 // var postData = {
 // 		'startDateTime': '2021-02-13T14:00:00.000Z'
@@ -123,26 +121,57 @@ d.setDate(n-1);
 //     });
 
 
-fetch('/search', {
-	method: 'POST',
-	body: JSON.stringify({
-		startDateTime: d
-    }),
-    headers: {
-    	'Content-type': 'application/json; charset=UTF-8',
-    },
-})
-	.then((response) => response.json())
-	.then((json) => console.log(json));
+// fetch('/search', {
+// 	method: 'POST',
+// 	body: JSON.stringify({
+// 		startDateTime: d
+//     }),
+//     headers: {
+//     	'Content-type': 'application/json; charset=UTF-8',
+//     },
+// })
+// 	.then((response) => response.json())
+// 	.then((json) => console.log(json));
 
 
 
 function updateChart(count) {
+	var d = new Date();
+	var n = d.getDate();
+	d.setDate(n-1);
 	count = count || 1;
 	var deltaY1, deltaY2, deltaY3;
 	for (var i = 0; i < count; i++) {
 		time.setTime(time.getTime() + updateInterval);
 		
+		fetch('/search', {
+			method: 'POST',
+			body: JSON.stringify({
+				startDateTime: d
+			}),
+			headers: {
+			'Content-type': 'application/json; charset=UTF-8',
+			},
+		})
+		.then((response) => response.json())
+		.then((json) =>  {
+			console.log(json)
+		});
+		// .then((data) =>
+		// datas.forEach((data) => {
+		// 	// var slotNo = parseInt(data.slotNo);
+		// 	// var startTime = data.startDateTime;
+		// 	// var endTime = data.endDateTime;
+		// 	// var duration = endTime - startTime;
+		// 	// console.log(slotNo);
+		// 	console.log("get");
+
+		// 	// if (!cache.includes(data.content)) {
+		// 	// app.appendChild(makeNewScream(data.author, data.content));
+		// 	// cache.push(data.content);
+		// 	// }
+		// }));
+
 		deltaY1 = -1 + Math.random() * (1 + 1);
 		deltaY2 = -1 + Math.random() * (1 + 1);
 		deltaY3 = -1 + Math.random() * (1 + 1);
