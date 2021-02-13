@@ -1,0 +1,19 @@
+Index: frontend/index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>Document</title>\r\n</head>\r\n<body>\r\n    \r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/index.html b/frontend/index.html
+--- a/frontend/index.html	(revision 0acf59392bc17081cd631fd616e5451b5c53cdd3)
++++ b/frontend/index.html	(date 1613188190164)
+@@ -7,6 +7,6 @@
+     <title>Document</title>
+ </head>
+ <body>
+-    
++
+ </body>
+ </html>
+\ No newline at end of file
