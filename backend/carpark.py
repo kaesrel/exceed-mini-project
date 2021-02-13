@@ -7,7 +7,6 @@ mongo = PyMongo(app)
 
 myCollection = mongo.db.g13
 
-<<<<<<< HEAD
 @app.route('/create', methods=['POST'])
 def insert():
     data = request.json
@@ -36,9 +35,6 @@ def replace():
 
     myCollection.update_one(filt, updated_content)
     return {"result": "Replace successfully"}
-=======
-print("hello test")
->>>>>>> 3d231ca55932971d55d868b36f4d4f339bb926b2
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port='50003', debug=True)
