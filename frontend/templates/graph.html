@@ -1,0 +1,199 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script>
+window.onload = function () {
+
+var dataPoints1 = [];
+var dataPoints2 = [];
+var dataPoints3 = [];
+var dataPoints4 = [];
+var dataPoints5 = [];
+
+var options = {
+	title: {
+		text: "Car Park Cost vs Time"
+	},
+	axisX: {
+		title: "chart updates every 2 secs"
+	},
+	axisY: {
+		suffix: "XCoin",
+		includeZero: false
+	},
+	toolTip: {
+		shared: true
+	},
+	legend: {
+		cursor: "pointer",
+		verticalAlign: "top",
+		fontSize: 22,
+		fontColor: "dimGrey",
+		itemclick: toggleDataSeries
+	},
+	data: [{
+		type: "line",
+		xValueType: "dateTime",
+		yValueFormatString: "###XCoin",
+		xValueFormatString: "hh:mm:ss TT",
+		showInLegend: true,
+		name: "Slot 1",
+		dataPoints: dataPoints1
+	},
+	{
+		type: "line",
+		xValueType: "dateTime",
+		yValueFormatString: "###XCoin",
+		showInLegend: true,
+		name: "Slot 2",
+		dataPoints: dataPoints2
+	}, {
+		type: "line",
+		xValueType: "dateTime",
+		yValueFormatString: "###XCoin",
+		showInLegend: true,
+		name: "Slot 3",
+		dataPoints: dataPoints3
+	}, {
+        type: "line",
+		xValueType: "dateTime",
+		yValueFormatString: "###XCoin",
+		showInLegend: true,
+		name: "Slot 4",
+		dataPoints: dataPoints4
+    }, {
+        type: "line",
+		xValueType: "dateTime",
+		yValueFormatString: "###XCoin",
+		showInLegend: true,
+		name: "Slot 5",
+		dataPoints: dataPoints5
+    }]
+};
+
+var chart = $("#chartContainer").CanvasJSChart(options);
+
+function toggleDataSeries(e) {
+	if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+		e.dataSeries.visible = false;
+	}
+	else {
+		e.dataSeries.visible = true;
+	}
+	e.chart.render();
+}
+
+var updateInterval = 2000; //millisec
+// initial value
+var yValue1 = 800;
+var yValue2 = 810;
+var yValue3 = 780;
+// -------
+var yValue4 = 690;
+var yValue5 = 0;
+
+var time = new Date;
+// starting at 10.00 am
+time.setHours(10);
+time.setMinutes(00);
+time.setSeconds(00);
+time.setMilliseconds(00);
+
+
+// fetch("127.0.0.1:50003/search")
+//     	.then((data) => data.json())
+//     	.then((datas) => {
+// 			datas.forEach((data) => {
+// 			if (!cache.includes(data.author)) {
+// 			app.appendChild(makeNewNode(data.author));
+// 			cache.push(data.author);
+// 			}
+//       	});
+//     });
+
+var d = new Date();
+var n = d.getDate();
+d.setDate(n-1);
+
+// var postData = {
+// 		'startDateTime': '2021-02-13T14:00:00.000Z'
+//     };
+//     $.post('/search',postData,function(data,status){
+//         console.log("Data: " + data + "\nStatus: " + status);
+//     });
+
+
+fetch('/search', {
+	method: 'POST',
+	body: JSON.stringify({
+		startDateTime: d
+    }),
+    headers: {
+    	'Content-type': 'application/json; charset=UTF-8',
+    },
+})
+	.then((response) => response.json())
+	.then((json) => console.log(json));
+
+
+
+function updateChart(count) {
+	count = count || 1;
+	var deltaY1, deltaY2, deltaY3;
+	for (var i = 0; i < count; i++) {
+		time.setTime(time.getTime() + updateInterval);
+		
+		deltaY1 = -1 + Math.random() * (1 + 1);
+		deltaY2 = -1 + Math.random() * (1 + 1);
+		deltaY3 = -1 + Math.random() * (1 + 1);
+
+		// adding random value and rounding it to two digits. 
+		yValue1 = Math.round((yValue1 + deltaY1) * 100) / 100;
+		yValue2 = Math.round((yValue2 + deltaY2) * 100) / 100;
+		yValue3 = Math.round((yValue3 + deltaY3) * 100) / 100;
+
+
+		// pushing the new values
+		dataPoints1.push({
+			x: time.getTime(),
+			y: yValue1
+		});
+		dataPoints2.push({
+			x: time.getTime(),
+			y: yValue2
+		});
+		dataPoints3.push({
+			x: time.getTime(),
+			y: yValue3
+		});
+		dataPoints4.push({
+			x: time.getTime(),
+			y: yValue4
+		});
+		dataPoints5.push({
+			x: time.getTime(),
+			y: yValue5
+		});
+	}
+
+	// updating legend text with  updated with y Value 
+	options.data[0].legendText = "Slot 1 : " + yValue1 + "XCoin";
+	options.data[1].legendText = "Slot 2 : " + yValue2 + "XCoin";
+	options.data[2].legendText = "Slot 3 : " + yValue3 + "XCoin";
+	options.data[3].legendText = "Slot 4 : " + yValue2 + "XCoin";
+	options.data[4].legendText = "Slot 5 : " + yValue3 + "XCoin";
+	$("#chartContainer").CanvasJSChart().render();
+}
+// generates first set of dataPoints 
+updateChart(100);
+setInterval(function () { updateChart() }, updateInterval);
+
+}
+</script>
+</head>
+<body>
+<div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+</body>
+</html>
