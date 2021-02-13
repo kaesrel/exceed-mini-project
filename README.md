@@ -1,8 +1,18 @@
 # exceed-mini-project
 
-## Hardward feature
+## Hard-ware feature
 
 * Detect the light density and change it to the binary state (show 0 and 1 in every seconds).
+
+## Back-end feature
+
+* Get the 2 groups of data from hard-ware.
+  - First group : the data of slot1 and slot2.
+  - Second group : the data of slot3 and slot4.
+
+* Combine the two group into the one data.
+
+* Still incomplete for combination of datas.
 
 ## Front-end feature
 
