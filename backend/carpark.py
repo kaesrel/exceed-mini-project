@@ -7,6 +7,7 @@ mongo = PyMongo(app)
 
 myCollection = mongo.db.g13
 
-print("test")
+print("hello test")
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port='50003', debug=True)
