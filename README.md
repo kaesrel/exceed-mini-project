@@ -1,5 +1,9 @@
 # exceed-mini-project
 
+## Hardward feature
+
+* Detect the light density and change it to the binary state (show 0 and 1 in every seconds).
+
 ## Front-end feature
 
 * Instant of 2 states, we seperate to 3 states of parking.
