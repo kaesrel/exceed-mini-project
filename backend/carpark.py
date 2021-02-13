@@ -3,7 +3,7 @@ from flask_pymongo import PyMongo
 
 app = Flask(__name__)
 app.config['MONGO_URI'] = 'mongodb://exceed_user:1q2w3e4r@158.108.182.0:2277/exceed_backend'
-mongo = PyMongo(app)
+mongo =PyMongo(app)
 
 myCollection = mongo.db.g13
 
@@ -22,9 +22,8 @@ def insert():
 @app.route('/replace', methods=['PUT'])
 def replace():
     data = request.json
-    carpark_name = request.args.get('carpark')
 
-    filt = {"carpark": carpark_name} #158.108.182.15:50003/replace?carpark="Carpark_{x}"
+    filt = {"carpark": data["carpark"]}
 
     updated_content = {"$set": {
         "carpark": data["carpark"],
